@@ -34,14 +34,14 @@
         }
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
-            console.log(data, "data")
-            console.log(e)
+            //document.querySelector('#chat-log').value += (data.message + '\n');
+            //console.log(data, "data")
+            //console.log(e)
 
             if(!existingUsers.includes(data.user)) {
-                console.log(data)
+                //console.log(data)
                 existingUsers.push(data.user)
-                console.log(existingUsers)
+                //console.log(existingUsers)
                 let x = document.createElement('p');
                 x.innerText = data.user;
                 x.id = data.user;
@@ -71,6 +71,30 @@
             }));
             messageInputDom.value = '';
         };
+        document.addEventListener('keyup', handleKey);
+        function handleKey(e)
+        {
+            if(e.code === 'KeyW') {
+                chatSocket.send(JSON.stringify({
+                    'message': 'up'
+                }));
+            }
+            if(e.code === 'KeyS') {
+                chatSocket.send(JSON.stringify({
+                    'message': 'down'
+                }));
+            }
+            if(e.code === 'KeyA') {
+                chatSocket.send(JSON.stringify({
+                    'message': 'left'
+                }));
+            }
+            if(e.code === 'KeyD') {
+                chatSocket.send(JSON.stringify({
+                    'message': 'right'
+                }));
+            }
+        }
     </script>
     <div class="dot">x</div>
     <div class="map">
