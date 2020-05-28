@@ -33,14 +33,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def start_periodic_task(self):
         while True:
             self.time = datetime.now()
-            message = f"{self.x} {self.y} {self.user}"
-            await self.send(text_data=json.dumps({
-                'message': message,
-                'x': self.x,
-                'y': self.y,
-                'user':self.user.id
-            }))
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(0.03)
 
     async def disconnect(self, close_code):
         # Leave room group
@@ -60,13 +53,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         diff = self.time - tim
         diff = diff / timedelta(milliseconds=1)
         if message == 'right':
-            self.x = self.x + (100*diff/1000)
+            self.x = self.x + (1000*diff/1000)
         if message == 'left':
-            self.x = self.x - (100*diff/1000)
+            self.x = self.x - (1000*diff/1000)
         if message == 'down':
-            self.y = self.y + (100*diff/1000)
+            self.y = self.y + (1000*diff/1000)
         if message == 'up':
-            self.y = self.y - (100*diff/1000)
+            self.y = self.y - (1000*diff/1000)
         message = message + f"{self.user}, {self.time}, diff: {diff}, x: {self.x}, y: {self.y}, id: {self.user.id}"
 
         # Send message to room group
