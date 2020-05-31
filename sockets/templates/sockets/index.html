@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Chat</title>
 </head>
+
 <body>
 
     {% if messages %}
-        {% for message in messages %}
-            <p id="alert">{{message}}</p>
-        {% endfor %}
+    {% for message in messages %}
+    <p id="alert">{{message}}</p>
+    {% endfor %}
     {% endif %}
     Podaj nazwę pokoju do którego chcesz dołączyć<br>
     <input id="input" type="text" size="100"><br>
@@ -17,21 +19,22 @@
 
     <script>
         document.querySelector('#input').focus();
-        document.querySelector('#input').onkeyup = function(e) {
+        document.querySelector('#input').onkeyup = function (e) {
             if (e.keyCode === 13) {
                 document.querySelector('#submit').click();
             }
         };
-        document.querySelector('#submit').onclick = function(e) {
+        document.querySelector('#submit').onclick = function (e) {
             let roomName = document.querySelector('#input').value;
             window.location.pathname = '/' + roomName + '/';
         };
     </script>
-        <script>
+    <script>
         x = document.getElementById('alert');
         setTimeout(() => {
             x.remove();
         }, 3000)
     </script>
 </body>
+
 </html>
