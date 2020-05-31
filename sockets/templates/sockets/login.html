@@ -7,6 +7,12 @@
     <title>Logowanie</title>
 </head>
 <body>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p id="alert">{{message}}</p>
+        {% endfor %}
+    {% endif %}
      <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -20,5 +26,11 @@
                 <input type="submit" value="Login">
               </form>
               <a href="{% url 'register' %}">Zarejestruj</a>
+                  <script>
+        x = document.getElementById('alert');
+        setTimeout(() => {
+            x.remove();
+        }, 3000)
+    </script>
 </body>
 </html>

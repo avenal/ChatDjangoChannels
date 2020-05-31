@@ -8,9 +8,11 @@
     <title>Chat</title>
   </head>
   <body>
-    <style>
-      
-    </style>
+    {% if messages %}
+        {% for message in messages %}
+            <p id="alert">{{message}}</p>
+        {% endfor %}
+    {% endif %}
       <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
                             <i class="fas fa-sign-out-alt"></i> Wyloguj
                             </a>
@@ -53,6 +55,12 @@
         );
         messageInputDom.value = "";
       };
+    </script>
+            <script>
+        x = document.getElementById('alert');
+        setTimeout(() => {
+            x.remove();
+        }, 3000)
     </script>
   </body>
 </html>

@@ -55,7 +55,7 @@ def logout(request):
       auth.logout(request)
       messages.success(request, 'Wylogowano')
       return redirect('index')
-# Create your views here.
+
 @login_required(login_url='login')
 def index(request):
     return render(request, 'sockets/index.html')
